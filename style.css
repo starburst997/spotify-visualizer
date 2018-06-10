@@ -52,7 +52,7 @@ div#bg {
     animation-name: backgroundAnim;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
-    animation-duration: 30s;
+    animation-duration: 45s;
 }
 
 div#bgOver {
@@ -72,27 +72,27 @@ canvas {
     z-index: 1;
 }
 
-body.viz0 canvas {
+body.lastViz0 #transition, body.viz0 #canvas, body.viz0 #canvas3d {
     mix-blend-mode: normal;
 }
 
-body.viz3 canvas {
+body.lastViz3 #transition, body.viz3 #canvas, body.viz3 #canvas3d {
     mix-blend-mode: screen;
 }
 
-body.viz4 canvas {
+body.lastViz4 #transition, body.viz4 #canvas, body.viz4 #canvas3d {
     mix-blend-mode: lighten;
 }
 
-body.viz5 canvas {
+body.lastViz5 #transition, body.viz5 #canvas, body.viz5 #canvas3d {
     mix-blend-mode: hue;
 }
 
-body.viz6 canvas {
+body.lastViz6 #transition, body.viz6 #canvas, body.viz6 #canvas3d {
     mix-blend-mode: lighten;
 }
 
-body.viz7 canvas {
+body.lastViz7 #transition, body.viz7 #canvas, body.viz7 #canvas3d {
     mix-blend-mode: normal;
 }
 
@@ -132,13 +132,14 @@ body.viz7 canvas {
 }
 
 div.toast {
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.35);
     position: absolute;
     left: 0;
     bottom: 0;
     right: 0;
     text-align: center;
     padding: 40px;
+    padding-top: 0px;
     transform: translateY(100px);
     transition: all 1.0s ease-in-out;
     opacity: 0.0;
@@ -178,7 +179,7 @@ div.trackposition {
 }
 
 div.trackposition div.fill {
-    transition: width 0.1s ease-in-out;
+    transition: width 1.0s ease-in-out;
     background-color: #1ed660;
     position: absolute;
     left: 0;

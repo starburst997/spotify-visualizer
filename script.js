@@ -293,16 +293,25 @@ function setNowPlayingTrack(track) {
   }
   curTrack = track;
   imageList.length = 0;
-  imageList.push(track.album.images[0].url);
-  fetchArtist(track.artists[0].uri, function(artist) {
-    artist.images.forEach(function(image) {
-        if (image.width >= 640) {
-            imageList.push(image.url);
-        }
+  
+  for (var i = 0; i < track.album.images.length; i++) {
+    imageList.push(track.album.images[i].url);
+  }
+  
+  for (var i = 0; i < track.artists.length; i++) {
+    fetchArtist(track.artists[i].uri, function(artist) {
+      artist.images.forEach(function(image) {
+          if (image.width >= 640) {
+              imageList.push(image.url);
+          }
+      });
     });
-  });
+  }
+
   trackURI = uri;
   toast(trackName, artistName + ' - ' + albumName);
+
+  changeViz(currentViz + 1);
 }
 
 function msPerImage() {

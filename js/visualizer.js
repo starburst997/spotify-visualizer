@@ -53,7 +53,7 @@ function setup() {
 
         // set up canvases and renderers
         cv = document.getElementById("canvas");
-        cv3d = new THREE.WebGLRenderer({ canvas: canvas3d, alpha: true });
+        cv3d = new THREE.WebGLRenderer({ canvas: canvas3d, alpha: true, preserveDrawingBuffer: true });
 
         // set up visualizer list
         visualizers.push(new VizRadialArcs(0));
@@ -110,8 +110,8 @@ function analyse() {
 var last = -1;
 function visualize() {
   if (currentViz != last) {
+      document.body.setAttribute("class", 'lastViz' + last + ' viz' + currentViz);
       last = currentViz;
-      document.body.setAttribute("class", 'viz' + currentViz);
   }
 
   animationHandle = requestAnimationFrame(visualize);
@@ -148,18 +148,74 @@ function setInputListeners() {
     //console.log(ev.keyCode);
   }
   document.body.onclick = function() {
-    currentViz = (currentViz + 1) % visualizers.length;
-    console.log('VIZ', currentViz);
     //document.getElementById('bg').style.backgroundImage = "url('img/bg"+(currentViz % 2)+".jpg')";
-    recalculateSizes();
+    changeViz(currentViz + 1);
   }
   window.onresize = function() { recalculateSizes(); };
 
   // Change every 2min
   setInterval(function() {
-    currentViz = (currentViz + 1) % visualizers.length;
-    recalculateSizes();
+    changeViz(currentViz + 1);
   }, 2 * 60 * 1000);
+}
+
+function changeViz(viz) {
+ 
+    var is3d = visualizers[currentViz].is3d;
+    var current = document.getElementById(is3d ? 'canvas3d' : 'canvas');
+    currentViz = viz % visualizers.length;
+    
+    var transition = document.getElementById('transition');
+    var destCtx = transition.getContext('2d');
+    
+    if (is3d) {
+        destCtx.clearRect(0,0,transition.width, transition.height);
+
+        var gl = cv3d.getContext();
+        var width = cv3d.domElement.width;
+        var height = cv3d.domElement.height;
+
+        var size = width * height * 4;
+        var pixels = new Uint8Array(size);
+        var image = destCtx.createImageData(width, height);
+
+        gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+
+        for (var i = 0; i < size; i++) {
+            image.data[i] = pixels[i];
+        }
+
+        destCtx.putImageData(image, 0, 0);
+
+
+    } else {
+        destCtx.clearRect(0,0,transition.width, transition.height);
+        destCtx.drawImage(current, 0, 0);
+    }
+    
+    if (visualizers[currentViz].is3d) {
+        document.getElementById("canvas").className = "hidden";
+        document.getElementById("canvas3d").className = "";
+    } else {
+        document.getElementById("canvas3d").className = "hidden";
+        document.getElementById("canvas").className = "";
+    }
+
+    current = document.getElementById(visualizers[currentViz].is3d ? 'canvas3d' : 'canvas');
+
+    transition.style.opacity = 1.0;    
+    current.style.opacity = 0.0;
+    
+    var transitionInterval;
+    transitionInterval = setInterval(function() {
+        transition.style.opacity = parseFloat(transition.style.opacity) - 0.01;
+        current.style.opacity = parseFloat(current.style.opacity) + 0.01;
+        if (transition.style.opacity <= 0) {
+            clearInterval(transitionInterval);
+        }
+    }, 1/60 * 1000);
+    
+    visualizers[currentViz].resize();
 }
 
 /*******************************************************************************
@@ -188,18 +244,17 @@ function recalculateSizes() {
     var h = window.innerHeight;
   
     // switch between 2D/3D canvases
-    if (visualizers[currentViz].is3d) {
-      cv3d.setSize(w, h);
-      document.getElementById("canvas").className = "hidden";
-      document.getElementById("canvas3d").className = "";
-    } else {
-      cv.width = w;
-      cv.height = h;
-      ctx = cv.getContext("2d");
-      document.getElementById("canvas3d").className = "hidden";
-      document.getElementById("canvas").className = "";
-    }
+    cv3d.setSize(w, h);
+    cv.width = w;
+    cv.height = h;
+    ctx = cv.getContext("2d");
     
+    var transition = document.getElementById('transition');
+    transition.width = w;
+    transition.height = h;
+    transition.style.width  = w + 'px';
+    transition.style.height = h + 'px';
+
     shortestSide = Math.min(w, h);
     longestSide = Math.max(w, h);
     hypotenuse = Math.sqrt(w * w + h * h);
