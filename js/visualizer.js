@@ -154,9 +154,9 @@ function setInputListeners() {
   window.onresize = function() { recalculateSizes(); };
 
   // Change every 2min
-  setInterval(function() {
+  /*setInterval(function() {
     changeViz(currentViz + 1);
-  }, 2 * 60 * 1000);
+  }, 2 * 60 * 1000);*/
 }
 
 function changeViz(viz) {
