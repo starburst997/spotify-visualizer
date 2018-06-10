@@ -2,7 +2,7 @@
 
 [Test it live!](https://starburst997.github.io/spotify-visualizer/)
 
-![screenshot](https://raw.githubusercontent.com/starburst997/spotify-visualizer/img/thumbnail.png)
+![screenshot](https://github.com/starburst997/spotify-visualizer/raw/master/img/thumbnail.png)
 
 Basically I wanted something nice to be displayed on my TV while coding, like a spotify music visualizer (album art with artist / title and visualizer on top).
 
