@@ -2,6 +2,8 @@
 
 [Test it live!](https://starburst997.github.io/spotify-visualizer/)
 
+![screenshot](https://raw.githubusercontent.com/starburst997/spotify-visualizer/img/thumbnail.png)
+
 Basically I wanted something nice to be displayed on my TV while coding, like a spotify music visualizer (album art with artist / title and visualizer on top).
 
 Hacked this by merging those two project ([webgl-spotify-connect-now-playing-screen-example](https://github.com/plamere/webgl-spotify-connect-now-playing-screen-example) and [visualizer](https://github.com/ianharmon/visualizer)) so kudos to them!
