@@ -166,15 +166,6 @@ function sendCommand(method, command, querystring) {
   }).send();
 }
 
-function fetchVectors(albumimage, callback) {
-  createRequest('POST', 'https://ilovepolygons.possan.se/convert', function (request) {
-    if (request.status >= 200 && request.status < 400) {
-      nextVectorData = JSON.parse(request.responseText);
-      callback();
-    }
-  }).send('url=' + encodeURIComponent(albumimage) + '&cutoff=10000&threshold=20');
-}
-
 function sendPlayContext(uri, offset) {
   sendPlayCommand({
     context_uri: uri,
@@ -197,12 +188,9 @@ function tick() {
       console.log('Album URI changed: ' + albumImageURL);
       visibleAlbumImageURL = albumImageURL;
       console.log('Got album image..');
-      fetchVectors(albumImageURL, function () {
-        console.log('Got album vectors..');
-        state = 'fadein';
-        stateTime = 0.0;
-        stateStart = globalTime;
-      });
+      state = 'fadein';
+      stateTime = 0.0;
+      stateStart = globalTime;
     }
   } else if (state == 'fadein') {
     stateTime = globalTime - stateStart;

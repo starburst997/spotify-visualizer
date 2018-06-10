@@ -94,6 +94,9 @@ function setup() {
 */
 function analyse() {
   analyser.getByteFrequencyData(spectrum);
+
+  console.log('!', spectrum);
+
   // dampen falloff for some
   if (visualizers[currentViz].dampen == true) {
     for (var i = 0; i < spectrum.length; i++) {
