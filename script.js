@@ -294,7 +294,7 @@ function setNowPlayingTrack(track) {
   curTrack = track;
   imageList.length = 0;
   
-  for (var i = 0; i < track.album.images.length; i++) {
+  for (var i = 0; i < 1 /*track.album.images.length*/; i++) {
     imageList.push(track.album.images[i].url);
   }
   

@@ -139,7 +139,7 @@ div.toast {
     right: 0;
     text-align: center;
     padding: 40px;
-    padding-top: 15px;
+    padding-top: 20px;
     transform: translateY(100px);
     transition: all 1.0s ease-in-out;
     opacity: 0.0;

@@ -53,7 +53,7 @@ function setup() {
 
         // set up canvases and renderers
         cv = document.getElementById("canvas");
-        cv3d = new THREE.WebGLRenderer({ canvas: canvas3d, alpha: true, preserveDrawingBuffer: true });
+        cv3d = new THREE.WebGLRenderer({ canvas: canvas3d, alpha: true/*, preserveDrawingBuffer: true*/ });
 
         // set up visualizer list
         visualizers.push(new VizRadialArcs(0));
@@ -169,7 +169,7 @@ function changeViz(viz) {
     var destCtx = transition.getContext('2d');
     
     if (is3d) {
-        destCtx.clearRect(0,0,transition.width, transition.height);
+        /*destCtx.clearRect(0,0,transition.width, transition.height);
 
         var gl = cv3d.getContext();
         var width = cv3d.domElement.width;
@@ -185,8 +185,10 @@ function changeViz(viz) {
             image.data[i] = pixels[i];
         }
 
-        destCtx.putImageData(image, 0, 0);
+        destCtx.putImageData(image, 0, 0);*/
 
+        destCtx.clearRect(0,0,transition.width, transition.height);
+        destCtx.drawImage(current, 0, 0);
 
     } else {
         destCtx.clearRect(0,0,transition.width, transition.height);
