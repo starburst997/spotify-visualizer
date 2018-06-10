@@ -67,7 +67,7 @@ function createRequest(method, url, onload) {
   if (method != 'GET') {
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
   }
-  request.onerror = function () { login() };
+  request.onerror = function () {};
   request.onload = onload.bind(this, request);
   return request;
 }
@@ -81,7 +81,13 @@ function requestFile(filename, callback) {
 }
 
 function createAuthorizedRequest(method, url, onload) {
-  var request = createRequest(method, url, onload);
+  var request = createRequest(method, url, function(request) {
+    if (request.status < 200 || request.status >= 400) {
+      login();
+    }
+
+    onload(request);
+  });
   request.setRequestHeader('Authorization', 'Bearer ' + accessToken);
   return request;
 }
