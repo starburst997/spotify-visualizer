@@ -142,6 +142,7 @@ div.toast {
     transform: translateY(100px);
     transition: all 1.0s ease-in-out;
     opacity: 0.0;
+    z-index: 99;
 }
 
 div.toast.visible {
@@ -173,6 +174,7 @@ div.trackposition {
     height: 5px;
     background-color: rgba(0,0,0,0.4);
     border-radius: 10px;
+    z-index: 100;
 }
 
 div.trackposition div.fill {
