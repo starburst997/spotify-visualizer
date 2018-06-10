@@ -232,8 +232,11 @@ function tick() {
     }
   }
 
-  var url = "url('"+visibleAlbumImageURL+"')";
-  if (document.body.style.backgroundImage != url) document.body.style.backgroundImage = url;
+  if (visibleAlbumImageURL) {
+    var bg = document.getElementById('bg');
+    var url = "url('"+visibleAlbumImageURL+"')";
+    if (bg.style.backgroundImage != url) bg.style.backgroundImage = url;
+  }
 
   var timeNow = new Date().getTime();
   if (firstTime == 0) {

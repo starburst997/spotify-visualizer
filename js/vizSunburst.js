@@ -57,7 +57,7 @@ VizSunburst.prototype.vary = function(variant) {
 
 VizSunburst.prototype.draw = function(spectrum) {
   ctx.save();
-  ctx.fillStyle = "#000000";
+  ctx.fillStyle = "rgba(255,0,0,0)";
   ctx.fillRect(0, 0, cv.width, cv.height);
   ctx.translate(cv.width / 2, cv.height / 2);
   

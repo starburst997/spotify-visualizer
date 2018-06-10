@@ -73,6 +73,8 @@ VizMountain.prototype.draw = function(spectrum) {
     var hue = Math.floor(i / 3 + this.hueOffset) % 360;
     var c = bigColorMap[hue * 100 + Math.floor(intensity * 99)]
     bar.material.color.setStyle(c);
+    bar.material.transparent = true;
+    bar.material.opacity = intensity;
   }
 
   // rotate camera

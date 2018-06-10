@@ -42,7 +42,7 @@ VizRadialArcs.prototype.draw = function(spectrum) {
     ctx.fill();
     ctx.closePath();
   }
-  ctx.fillStyle = '#000000';
+  ctx.fillStyle = 'rgba(0,0,0,0)';
   ctx.beginPath();
   ctx.arc(0, 0, centerRadius, 0, 2 * Math.PI, false);
   ctx.fill();

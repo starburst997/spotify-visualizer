@@ -53,7 +53,7 @@ function setup() {
 
         // set up canvases and renderers
         cv = document.getElementById("canvas");
-        cv3d = new THREE.WebGLRenderer({ canvas: canvas3d });
+        cv3d = new THREE.WebGLRenderer({ canvas: canvas3d, alpha: true });
 
         // set up visualizer list
         visualizers.push(new VizRadialArcs(0));
@@ -107,7 +107,13 @@ function analyse() {
 /*******************************************************************************
 * called each audio frame, manages rendering of visualization
 */
+var last = -1;
 function visualize() {
+  if (currentViz != last) {
+      last = currentViz;
+      document.body.setAttribute("class", 'viz' + currentViz);
+  }
+
   animationHandle = requestAnimationFrame(visualize);
   visualizers[currentViz].draw(spectrum);
 }
@@ -143,6 +149,8 @@ function setInputListeners() {
   }
   document.body.onclick = function() {
     currentViz = (currentViz + 1) % visualizers.length;
+    console.log('VIZ', currentViz);
+    //document.getElementById('bg').style.backgroundImage = "url('img/bg"+(currentViz % 2)+".jpg')";
     recalculateSizes();
   }
   window.onresize = function() { recalculateSizes(); };
