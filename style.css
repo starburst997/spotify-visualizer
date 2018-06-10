@@ -82,6 +82,7 @@ body.lastViz3 #transition, body.viz3 #canvas, body.viz3 #canvas3d {
 
 body.lastViz4 #transition, body.viz4 #canvas, body.viz4 #canvas3d {
     mix-blend-mode: lighten;
+    opacity: 0.5;
 }
 
 body.lastViz5 #transition, body.viz5 #canvas, body.viz5 #canvas3d {
@@ -93,7 +94,11 @@ body.lastViz6 #transition, body.viz6 #canvas, body.viz6 #canvas3d {
 }
 
 body.lastViz7 #transition, body.viz7 #canvas, body.viz7 #canvas3d {
-    mix-blend-mode: normal;
+    opacity: 0.5;
+}
+
+body.lastViz7 #transition, body.viz7 #canvas, body.viz8 #canvas3d {
+    opacity: 0.5;
 }
 
 .login {
