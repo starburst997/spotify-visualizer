@@ -139,7 +139,7 @@ div.toast {
     right: 0;
     text-align: center;
     padding: 40px;
-    padding-top: 0px;
+    padding-top: 15px;
     transform: translateY(100px);
     transition: all 1.0s ease-in-out;
     opacity: 0.0;
@@ -179,7 +179,7 @@ div.trackposition {
 }
 
 div.trackposition div.fill {
-    transition: width 1.0s ease-in-out;
+    transition: width 1.0s linear;
     background-color: #1ed660;
     position: absolute;
     left: 0;
