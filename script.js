@@ -232,6 +232,9 @@ function tick() {
     }
   }
 
+  var url = "url('"+visibleAlbumImageURL+"')";
+  if (document.body.style.backgroundImage != url) document.body.style.backgroundImage = url;
+
   var timeNow = new Date().getTime();
   if (firstTime == 0) {
     firstTime = timeNow;
@@ -274,10 +277,10 @@ function toast(title, subtitle) {
   document.getElementById('text2').innerText = subtitle || '';
   document.getElementById('toast').className = 'toast visible';
 
-  clearTimeout(closetimer);
+  /*clearTimeout(closetimer);
   closetimer = setTimeout(function () {
     document.getElementById('toast').className = 'toast';
-  }, 5000);
+  }, 5000);*/
 }
 
 function setNowPlayingTrack(track) {
@@ -298,8 +301,6 @@ function setNowPlayingTrack(track) {
   trackURI = uri;
   toast(trackName, artistName + ' - ' + albumName);
 }
-
-
 
 function msPerImage() {
     var imageDur = trackDuration;
