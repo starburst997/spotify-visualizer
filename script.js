@@ -67,7 +67,7 @@ function createRequest(method, url, onload) {
   if (method != 'GET') {
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
   }
-  request.onerror = function () {};
+  request.onerror = function () { login() };
   request.onload = onload.bind(this, request);
   return request;
 }
@@ -220,10 +220,17 @@ function tick() {
     }
   }
 
-  if (visibleAlbumImageURL) {
-    var bg = document.getElementById('bg');
-    var url = "url('"+visibleAlbumImageURL+"')";
-    if (bg.style.backgroundImage != url) bg.style.backgroundImage = url;
+  if (visibleAlbumImageURL && currentImage != visibleAlbumImageURL) {
+
+    currentImage = visibleAlbumImageURL;
+
+    var myImage = new Image(100, 200);
+    myImage.onload = function() {
+        var bg = document.getElementById('bg');
+        var url = "url('"+visibleAlbumImageURL+"')";
+        if (bg.style.backgroundImage != url) bg.style.backgroundImage = url;
+    };
+    myImage.src = visibleAlbumImageURL;
   }
 
   var timeNow = new Date().getTime();
@@ -232,6 +239,8 @@ function tick() {
   }
   globalTime = timeNow - firstTime;
 }
+
+var currentImage = '';
 
 // --------------------------------------------------------------------------------------
 // DOM UI
@@ -377,18 +386,6 @@ function initUI() {
 function initKeyboard() {
   window.addEventListener('keyup', function (event) {
     console.log('key up', event.keyCode);
-
-    // some hidden presets '1' .. '0'
-    if (event.keyCode == 49) { sendPlayContext('spotify:album:2gaw3G7HBQuz93N8X89JIA', 1); }
-    if (event.keyCode == 50) { sendPlayContext('spotify:album:2KWlNb50pLNM11pGqqVdSX'); }
-    if (event.keyCode == 51) { sendPlayContext('spotify:album:7xrc6SpiFhcgBaLYbqfB7k', 1); }
-    if (event.keyCode == 52) { sendPlayContext('spotify:album:64XdBdXNdguPHzBg8bdk5A'); }
-    if (event.keyCode == 53) { sendPlayContext('spotify:album:64XidJaSHIS1XMb4Po77b1', 9); }
-    if (event.keyCode == 54) { sendPlayContext('spotify:album:4wJmWEuo2ezowJeJVdQWYS', 1); }
-    if (event.keyCode == 55) { sendPlayContext('spotify:album:5uTGqtnYpSRYiFTEuQcmNE', 0); }
-    if (event.keyCode == 56) { sendPlayContext('spotify:album:4QNlqYSMYCPiKZfzUfH7jK', 1); }
-    if (event.keyCode == 57) { sendPlayContext('spotify:album:29JfxOC3yMXwy3KlX8WFUQ', 1); }
-    if (event.keyCode == 48) { sendPlayContext('spotify:album:68zh8sbZPMeJb7GnqomRJS', 0); }
 
     // left
     if (event.keyCode == 37) {
