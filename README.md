@@ -1,6 +1,6 @@
 # spotify-visualizer
 
-[Test it live!](http://TODO)
+[Test it live!](https://starburst997.github.io/spotify-visualizer/)
 
 Basically I wanted something nice to be displayed on my TV while coding, like a spotify music visualizer (album art with artist / title and visualizer on top).
 

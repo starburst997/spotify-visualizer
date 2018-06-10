@@ -148,7 +148,7 @@ function setInputListeners() {
   window.onresize = function() { recalculateSizes(); };
 
   // Change every 2min
-  setTimeout(function() {
+  setInterval(function() {
     currentViz = (currentViz + 1) % visualizers.length;
     recalculateSizes();
   }, 2 * 60 * 1000);
