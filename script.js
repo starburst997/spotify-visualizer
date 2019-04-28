@@ -300,6 +300,10 @@ function setNowPlayingTrack(track) {
   for (var i = 0; i < 1 /*track.album.images.length*/; i++) {
     imageList.push(track.album.images[i].url);
   }
+
+  imageList.push('./img/default1.jpg');
+  imageList.push('./img/default2.jpg');
+  imageList.push('./img/default3.jpg');
   
   for (var i = 0; i < track.artists.length; i++) {
     fetchArtist(track.artists[i].uri, function(artist) {

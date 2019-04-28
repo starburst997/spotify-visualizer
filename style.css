@@ -47,7 +47,7 @@ div#bg {
 
     background-color: #000000;
     transition: background-image 5s ease-in-out;
-    background-image: url('img/bg0.jpg');
+    background-image: url('img/default1.jpg');
 
     animation-name: backgroundAnim;
     animation-timing-function: ease-in-out;
