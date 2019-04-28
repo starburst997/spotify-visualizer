@@ -302,8 +302,8 @@ function setNowPlayingTrack(track) {
   }
 
   imageList.push('./img/default1.jpg');
-  imageList.push('./img/default2.jpg');
-  imageList.push('./img/default3.jpg');
+  //imageList.push('./img/default2.jpg');
+  //imageList.push('./img/default3.jpg');
   
   for (var i = 0; i < track.artists.length; i++) {
     fetchArtist(track.artists[i].uri, function(artist) {
